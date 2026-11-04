@@ -179,7 +179,97 @@ public class PlantDao {
 		return result;
 	}
 	
+	public int remove(int plantNo) {
+		int result = 0;
+		
+		String sql = """
+						DELETE
+						  FROM
+						  	   HOUSEPLANT
+						 WHERE
+						 	   PLANT_NO = 
+					 """;
+		sql += plantNo;
+		
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1", "HOSPITAL", "oracle");
+			 Statement stat = conn.createStatement()) {
+			
+			result = stat.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
+	public HousePlantDto oneRead(int plantNo) {
+		
+		String sql = """
+						 SELECT
+						 	    PLANT_NO
+						 	  , PLANT_NAME
+						 	  , PLANT_TYPE
+						   FROM
+						   	    HOUSEPLANT
+						  WHERE
+						  	    PLANT_NO =
+					 """;
+		sql += plantNo;
+		HousePlantDto hpd = null;
+		
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1", "HOSPITAL", "oracle");
+			 Statement stat = conn.createStatement();
+			 ResultSet rset = stat.executeQuery(sql)) {
+			
+			if (rset.next()) {
+				//PK를 가지고 조회했을 때 결과가 존재한다
+				hpd = new HousePlantDto(rset.getInt("PLANT_NO")
+								 	   ,rset.getString("PLANT_TYPE")
+								 	   ,rset.getString("PLANT_NAME")
+								 	   );
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		
+		return hpd;
+	}
+	
+	public List<HousePlantDto> search(String keyword) {
+		
+		List<HousePlantDto> plants = new ArrayList<HousePlantDto>();
+		
+		String sql = """
+						SELECT
+							   PLANT_NO
+							 , PLANT_NAME
+							 , PLANT_TYPE
+						 FROM  
+						 	   HOUSEPLANT
+						WHERE
+					 """;
+		sql += "PLANT_TYPE LIKE '%" + keyword + "%' ORDER BY PLANT_NO DESC";
+		
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1", "HOSPITAL", "oracle");
+			 Statement stat = conn.createStatement();
+			 ResultSet rset = stat.executeQuery(sql)
+			){
+			
+			while(rset.next()) {
+				plants.add(new HousePlantDto(rset.getInt("PLANT_NO")
+											,rset.getString("PLANT_TYPE")
+											,rset.getString("PLANT_NAME")
+											));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return plants;
+	}
 	
 	
 	

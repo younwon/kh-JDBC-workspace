@@ -21,5 +21,17 @@ public class PlantController {
 		HousePlantDto hpd = new HousePlantDto(plantNo, plantType, plantName);
 		return ps.edit(hpd);
 	}
+	
+	public int remove(int planNo) {
+		return ps.remove(planNo);
+	}
+	
+	public HousePlantDto oneRead(int planNo) {
+		return ps.oneRead(planNo);
+	}
+	
+	public List<HousePlantDto> search(String keyword) {
+		return ps.search(keyword);
+	}
 
 }

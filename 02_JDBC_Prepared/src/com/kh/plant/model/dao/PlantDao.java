@@ -140,6 +140,25 @@ public class PlantDao {
 		return result;
 	}
 	
+	public int remove(Connection conn, int plantNo) {
+		int result = 0;
+		String sql = """
+						DELETE
+						  FROM
+						  	   HOUSEPLANT
+						 WHERE
+						 	   PLANT_NO = ?
+					 """;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, plantNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	
 }
 

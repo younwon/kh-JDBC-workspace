@@ -50,7 +50,11 @@ public class PlantService {
 			throw new RuntimeException("식물번호는 1보다 작을 수 없습니다");
 		}
 		
-		return new PlantDao().remove(plantNo);
+		Connection conn = JdbcTemplate.getConnection();
+		int result = new PlantDao().remove(conn, plantNo);
+		JdbcTemplate.close(conn);
+		
+		return result;
 	}
 	
 	public HousePlantDto oneRead(int plantNo) {

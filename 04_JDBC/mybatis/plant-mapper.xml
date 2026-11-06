@@ -27,14 +27,18 @@
   	-> #{ 필드명, 변수명, map의 키값 } || ${ } => 옛날꺼(Statement)
    -->
    
-   <select id="read"
-   		   resultType="plant">
+   <sql id="plantColumn">
 		SELECT
-			   PLANT_NO "number"
-			 , PLANT_NAME name
-			 , PLANT_TYPE type
+			   PLANT_NO AS "number"
+			 , PLANT_NAME AS "name"
+			 , PLANT_TYPE AS "type"
 		  FROM
 		 	   HOUSEPLANT
+   </sql>
+   
+   <select id="read"
+   		   resultType="plant">
+		<include refid="plantColumn" />
 		 ORDER
 			BY		
 			   PLANT_NO DESC
@@ -44,5 +48,44 @@
    		1. 기본생성자가 존재할 것 2. 별칭으로 붙이는 필드의 setter메소드가 존재할 것
    		ResultSet의 조회 컬럼명 별칭을 필드명과 동일하게 맞춰준다면 AutoMapping이 구현됨
     -->
+    
+    <update id="edit"
+    	    parameterType="plant">
+    	UPDATE
+    		   HOUSEPLANT
+    	   SET
+    	   	   PLANT_NAME = #{name}
+    	   	 , PLANT_TYPE = #{type}
+    	 WHERE
+    	 	   PLANT_NO = #{number}
+    </update>
+    
+    <delete id="remove"
+    	    parameterType="_int">
+    	    DELETE
+    	      FROM
+    	    	   HOUSEPLANT
+    	     WHERE
+    	     	   PLANT_NO = #{plantNo}
+    </delete>
+    
+    <select id="oneRead"
+    		resultType="plant"
+    	    parameterType="_int">
+    		<include refid="plantColumn" />
+    		 WHERE
+    		 	   PLANT_NO = #{palntNo}
+    </select>
+    
+    <select id="search"
+    		resultType="plant"
+    		parameterType="string">
+    		<include refid="plantColumn" />
+    		WHERE
+    			  PLANT_TYPE LIKE '%' || #{keyword} || '%'
+    		ORDER
+    		   BY
+    		   	  PLANT_NO DESC
+    </select>
   
   </mapper>

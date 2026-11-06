@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 최상위속성안에 들어갈 요소를 정한다? -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <!-- 최상위속성 -->
+  <configuration>
+  
+  <!-- 컬럼명과 필드명이 같을 경우 별칭없이 자동매핑 -->
+  <settings>
+  	<setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+  
+  <typeAliases>
+  		<typeAlias type="com.kh.plant.model.dto.HousePlantDto" alias="plant"/>
+  </typeAliases>
+
+  	<!-- 
+  		environments : MyBatis에서 연동할 DB의 정보들을 등록하는 영역
+  					  -> default속성 값으로 어떤 DB를 기본으로 쓸건지 지정해야함
+  	 -->
+  	<environments default="development">
+  		<environment id="development">
+  			<!-- 
+  				transactionManager : 트랜잭션을 관리 type속성에 값을 JDBC / MANAGED 중 하나를 선택
+  				- JDBC : 트랜잭션을 개발자가 직접 관리 하겠다 (수동 commit)
+  				- MANAGED : 트랜잭션에 대해서 아무것도 안함 (자동 commit)
+  			 -->
+  			<transactionManager type="MANAGED" />
+  			
+  			<!-- 
+  				dataSource의 type => POOLED / UNPOOLED 중 하나를 선택
+  				ConnectionPool : Connection객체를 담아두는 영역, 한 번 생성된 객체를 재사용
+  				
+  				POOLED => 사용
+  				UNPOOLED => 사용 안함
+  				
+  				DataSource객체의 필드에 값을 set하기 위해서 setter메소드를 호출해야함
+  				XML파일에서는 setter를 호출시키기 위해서 property라는 요소를 사용함
+  				ds.setUsername("HOSPITAL");처럼 동작함?
+  				
+  			 -->
+  			 <dataSource type="POOLED">
+  			 	<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+  			 	<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1" />
+  			 	<property name="username" value="HOSPITAL" />
+  			 	<property name="password" value="oracle" />
+  			 </dataSource>
+  			
+  		</environment>
+  	</environments>
+  	
+  	<!-- mappers : 실행할 SQL문을 기록해둔 mapper파일을 등록하는 영역 -->
+  	<mappers>
+  		<mapper resource="plant-mapper.xml" />
+  	</mappers>
+  
+  </configuration>

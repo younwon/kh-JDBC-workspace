@@ -23,11 +23,27 @@ public class PlantDao {
 	}
 	
 	public List<HousePlantDto> read(SqlSession session) {
+		// 조회결과가 없으면 빈 리스트를 반환
 		return session.selectList("plantMapper.read");
 		
 	}
 	
-
+	public int edit(SqlSession session, HousePlantDto hpd) {
+		return session.update("plantMapper.edit", hpd);
+	}
+	
+	public int remove(SqlSession session, int plantNo) {
+		return session.delete("plantMapper.remove", plantNo);
+	}
+	
+	public HousePlantDto oneRead(SqlSession session, int plantNo) {
+		//selectOne은 조회결과가 없으면 null반환
+		return session.selectOne("plantMapper.oneRead", plantNo);
+	}
+	
+	public List<HousePlantDto> search(SqlSession session, String keyword) {
+		return session.selectList("plantMapper.search", keyword);
+	}
 }
 
 

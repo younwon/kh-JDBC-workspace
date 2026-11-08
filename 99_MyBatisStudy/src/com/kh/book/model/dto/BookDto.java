@@ -1,6 +1,6 @@
 package com.kh.book.model.dto;
 
-/** 도서 한 권의 정보를 전달하기 위한 DTO입니다. */
+/** 도서 한 권의 정보를 전달하기 위한 DTO */
 public class BookDto {
 	private int bookNo;
 	private String title;

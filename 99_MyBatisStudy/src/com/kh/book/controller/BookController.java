@@ -20,7 +20,7 @@ public class BookController {
 	}
 
 	public List<BookDto> selectAll() {
-		throw new UnsupportedOperationException("selectAll을 구현하세요.");
+		return bs.selectAll();
 	}
 
 	public BookDto selectByNo(int bookNo) {

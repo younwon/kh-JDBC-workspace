@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
   <mapper namespace="foodMapper">
   <!-- namespace : 각 mapper의 고유한 별칭 다른 매퍼랑 중복되어선 안됨 -->
   

@@ -1,6 +1,6 @@
 package com.kh.common;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.InputStream;
 
 import org.apache.ibatis.io.Resources;
@@ -19,6 +19,7 @@ public class Template {
 			// 1. SqlSessionFatoryBuilder 만들기 => 기본 생성자 호출
 			// 2. SqlSessionFatory 만들기 -> Builder를 참조해서 메소드를 호출
 			// 3. SqlSession 만들기 -> Factory를 참조해서 메소드 호출
+			
 			SqlSession sqlSession = new SqlSessionFactoryBuilder().build(stream).openSession();
 			
 			return sqlSession;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="bookMapper">
+  	<insert id="insertBook"
+  		    parameterType="com.kh.book.model.dto.BookDto">
+  		    	INSERT
+  		    	  INTO
+  		    	  	   BOOK
+  		    	VALUES
+  		    		   (
+  		    		   SEQ_BOOK_NO.NEXTVAL
+  		    		 , #{title}
+  		    		 , #{author}
+  		    		 , #{price}
+  		    		   )
+  		    
+  	</insert>
+  	
+  	<select id="selectAll"
+  			resultType="com.kh.book.model.dto.BookDto">
+  				SELECT
+  					  BOOK_NO
+  					, TITLE
+  					, AUTHOR
+  					, PRICE
+  				 FROM
+  				 	  BOOK
+  				ORDER
+  				   BY
+  				   	  BOOK_NO
+  	</select>
+  
+  </mapper>

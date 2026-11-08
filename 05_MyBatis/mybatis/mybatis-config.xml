@@ -7,20 +7,21 @@
   <!-- 최상위속성 -->
   <configuration>
   
-  <!-- 컬럼명과 필드명이 같을 경우 별칭없이 자동매핑 -->
-  <settings>
-  	<setting name="mapUnderscoreToCamelCase" value="true"/>
-  </settings>
-  
-  <typeAliases>
-  		<typeAlias type="com.kh.plant.model.dto.HousePlantDto" alias="plant"/>
-  </typeAliases>
+	  <!-- 컬럼명과 필드명이 같을 경우 별칭없이 자동매핑 -->
+	  <settings>
+	  	<setting name="mapUnderscoreToCamelCase" value="true"/>
+	  </settings>
+	  
+	  <typeAliases>
+	  		<typeAlias type="com.kh.plant.model.dto.HousePlantDto" alias="plant"/>
+	  </typeAliases>
 
   	<!-- 
   		environments : MyBatis에서 연동할 DB의 정보들을 등록하는 영역
-  					  -> default속성 값으로 어떤 DB를 기본으로 쓸건지 지정해야함
+  					  -> default : 속성 값으로 어떤 DB를 기본으로 쓸건지 지정해야함
   	 -->
   	<environments default="development">
+  	
   		<environment id="development">
   			<!-- 
   				transactionManager : 트랜잭션을 관리 type속성에 값을 JDBC / MANAGED 중 하나를 선택

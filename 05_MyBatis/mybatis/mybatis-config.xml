@@ -55,6 +55,7 @@
   	<!-- mappers : 실행할 SQL문을 기록해둔 mapper파일을 등록하는 영역 -->
   	<mappers>
   		<mapper resource="plant-mapper.xml" />
+  		<mapper resource="food-mapper.xml" />
   	</mappers>
   
   </configuration>

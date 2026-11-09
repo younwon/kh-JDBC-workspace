@@ -6,9 +6,9 @@ import com.kh.book.model.dto.BookDto;
 import com.kh.book.model.service.BookService;
 
 /**
- * View와 Service 사이를 연결하는 Controller 자리입니다.
+ * View와 Service 사이를 연결하는 Controller
  *
- * TODO: 학습하면서 BookService를 만들고 각 메소드에서 Service를 호출하도록 구현하세요.
+ * TODO: BookService를 만들고 각 메소드에서 Service를 호출하도록 구현
  */
 public class BookController {
 	BookService bs = new BookService();

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="subsMapper">
+
+	<sql id="subColumns">
+		SELECT
+			   SUB_NO
+			 , SUB_NAME
+			 , MONTHLY_FEE
+			 , PAYMENT_DAY
+			 , CATEGORY
+		  FROM 
+		  	   SUBSCRIPTION
+	</sql>
+
+	<select id="selectAll"
+			resultType="sub">
+		<include refid="subColumns" />
+		 ORDER
+		 	BY
+		 	   SUB_NO
+	</select>
+	
+	<insert id="insertSub"
+			parameterType="sub">
+		INSERT
+		  INTO
+		  	   SUBSCRIPTION
+		VALUES
+			   (
+			   SEQ_SUB_NO.NEXTVAL
+			 , #{subName}
+			 , #{monthlyFee}
+			 , #{paymentDay}
+			 , #{category}
+			   )
+	</insert>
+	
+	<select id="selectOne"
+			parameterType="_int"
+			resultType="sub">
+			
+		<include refid="subColumns" />
+		WHERE
+			   SUB_NO = #{subNo}
+	</select>
+	
+	<update id="updateFee">
+		UPDATE
+			   SUBSCRIPTION
+		   SET
+		   	   MONTHLY_FEE = #{monthlyFee}
+		 WHERE
+		 	   SUB_NO = #{subNo}
+	</update>
+	
+	<delete id="deleteSub">
+		DELETE
+		  FROM
+		  	   SUBSCRIPTION
+		 WHERE
+		 	   SUB_NO = #{subNO}
+	</delete>
+	
+	<select id="searchByCategory"
+			parameterType="string"
+			resultType="sub">
+		<include refid="subColumns" />
+		WHERE
+			  CATEGORY LIKE '%' || #{keyword} || '%'		
+	</select>
+	
+	<select id="countByName"
+			parameterType="string"
+			resultType="_int">
+		SELECT
+			   COUNT(*)
+		  FROM
+		  	   SUBSCRIPTION
+		 WHERE
+		 	   SUB_NAME = #{subName}
+	</select>
+	
+	<select id="searchByCondition"
+			parameterType="map"
+			resultType="sub">
+		<include refid="subColumns" />
+		WHERE
+		<choose>
+			<when test="menuNo == 1">
+				SUB_NAME LIKE '%' || #{keyword} || '%'
+			</when>
+			<when test="menuNo == 2">
+				CATEGORY LIKE '%' || #{keyword} || '%'
+			</when>
+			<otherwise>
+				1 = 1
+			</otherwise>
+		</choose>
+		ORDER
+		   BY
+		   	  SUB_NO DESC
+	</select>
+
+</mapper>

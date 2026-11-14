@@ -10,7 +10,8 @@
   	</settings>
   	
   	<typeAliases>
-  		<typeAlias type="com.kh.movie.model.dto.MovieDto" alias="movie"/>
+  		<typeAlias type="com.kh.movie.model.dto.MovieDto" alias="movieDto"/>
+  		<typeAlias type="com.kh.movie.model.dto.MovieReviewDto" alias="movieReviewDto"/>
   	</typeAliases>
   	
   	<environments default="development">

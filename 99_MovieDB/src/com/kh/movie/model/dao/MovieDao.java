@@ -13,4 +13,9 @@ public class MovieDao {
 		return session.selectList("movieMapper.selectAll");
 	}
 	
+	public List<MovieDto> selectMovieAndReviews(SqlSession session) {
+		System.out.println("dao도착");
+		return session.selectList("movieMapper.selectMoviewAndReviews");
+	}
+	
 }

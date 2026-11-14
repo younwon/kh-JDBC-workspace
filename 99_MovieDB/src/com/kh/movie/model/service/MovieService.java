@@ -17,5 +17,13 @@ public class MovieService {
 		session.close();
 		return list;
 	}
+	
+	public List<MovieDto> selectMovieAndReviews() {
+		System.out.println("서비스도착");
+		SqlSession session = getSqlSession();
+		List<MovieDto> list = ma.selectMovieAndReviews(session);
+		session.close();
+		return list;
+	}
 
 }

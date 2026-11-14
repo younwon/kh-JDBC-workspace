@@ -10,7 +10,10 @@ public class MovieController {
 
 	public List<MovieDto> selectAll() {
 		return ms.selectAll();
-		
+	}
+	
+	public List<MovieDto> selectMovieAndReviews() {
+		return ms.selectMovieAndReviews();
 	}
 
 }

@@ -1,10 +1,11 @@
 package com.kh.movie.view;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Scanner;
 
 import com.kh.movie.controller.MovieController;
 import com.kh.movie.model.dto.MovieDto;
+import com.kh.movie.model.dto.MovieReviewDto;
 
 public class MovieView {
 	Scanner scanner = new Scanner(System.in);
@@ -15,9 +16,7 @@ public class MovieView {
 	        System.out.println();
 	        System.out.println("영화 관리 프로그램입니다");
 	        System.out.println("1. 영화 전체 조회");
-	        System.out.println("2. 영화 추가");
-	        System.out.println("3. 영화 삭제");
-	        System.out.println("4. 영화 검색");
+	        System.out.println("2. 영화 리뷰 조회");
 	        System.out.println("0. 프로그램 종료");
 	        System.out.print("메뉴를 선택하세요 > ");
 
@@ -28,6 +27,7 @@ public class MovieView {
 	            	selectAll();
 	                break;
 	            case "2":
+	            	selectMovieAndReviews();
 	                break;
 	            case "3":
 	                break;
@@ -52,7 +52,29 @@ public class MovieView {
 				System.out.println(movieDto);
 			}
 		}
-		
+	}
+	
+	private void selectMovieAndReviews() {
+		List<MovieDto> list = mc.selectMovieAndReviews();
+		System.out.println(list.size());
+		if (list.isEmpty()) {
+			System.out.println("조회결과없음");
+		} else {
+			for (MovieDto s : list) {
+				System.out.println("===========================");
+				System.out.println(s.getMovieName() + "의 리뷰목록");
+				System.out.println("===========================");
+				List<MovieReviewDto> reviews = s.getReviews();
+				if (reviews.isEmpty()) {
+					System.out.println(s.getMovieName() + "은(는) 리뷰가 존재하지 않습니다");
+				}else {
+					for (MovieReviewDto r : reviews) {
+						System.out.println("리뷰 내용 : " + r.getContent() + " / 별점 " + r.getRating());
+					}
+				}
+				System.out.println();
+			}
+		}
 	}
 
 }

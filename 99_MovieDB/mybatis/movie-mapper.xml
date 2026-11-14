@@ -5,8 +5,22 @@
   
   <mapper namespace="movieMapper">
   	
+  	<resultMap type="movieDto" id="movieAndReviews">
+  		<id column="MOVIE_ID" property="movieId"/>
+  		<result column="MOVIE_NAME" property="movieName"/>
+  		<result column="RELEASE_DATE" property="reseaseDate"/>
+  		<result column="RUNNING_TIME" property="runningTime"/>
+  		<result column="MOVIE_RATING" property="movieRating"/>
+  		<collection property="reviews" ofType="movieReviewDto">
+  			<id column="REVIEW_NO" property="reviewNo"/>
+  			<result column="CONTENT" property="content"/>
+  			<result column="REVIEW_DATE" property="reviewDate"/>
+  			<result column="RATING" property="rating"/>
+  		</collection>
+  	</resultMap>
+  	
   	<select id="selectAll"
-  			resultType="movie">
+  			resultType="movieDto">
   		SELECT
   			   MOVIE_ID
   			 , MOVIE_NAME
@@ -18,6 +32,27 @@
   		 ORDER
   		 	BY
   		 	   MOVIE_ID DESC
+  	</select>
+  	
+  	<select id="selectMoviewAndReviews"
+  			resultMap="movieAndReviews">
+  		SELECT
+  			   m.MOVIE_ID
+  			 , MOVIE_NAME
+  			 , REVIEW_NO
+  			 , CONTENT
+  			 , REVIEW_DATE
+  			 , RATING
+  		  FROM
+  		  	   MOVIE m
+  		  LEFT
+  		  JOIN
+  		  	   MOVIE_REVIEW r
+  		    ON
+  		       m.MOVIE_ID = r.MOVIE_ID 	
+  		 ORDER
+  		 	BY
+  		 	   r.REVIEW_DATE DESC	  	
   	</select>
   	
   </mapper>

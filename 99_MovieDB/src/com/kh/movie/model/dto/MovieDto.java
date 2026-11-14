@@ -1,6 +1,7 @@
 package com.kh.movie.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class MovieDto {
 	private Long movieId;
@@ -8,6 +9,14 @@ public class MovieDto {
 	private Date releaseDate;
 	private Integer runningTime;
 	private String movieRating;
+	private List<MovieReviewDto> reviews;
+	
+	public List<MovieReviewDto> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<MovieReviewDto> reviews) {
+		this.reviews = reviews;
+	}
 	public MovieDto() {
 		super();
 	}
@@ -59,8 +68,9 @@ public class MovieDto {
 	@Override
 	public String toString() {
 		return "MovieDto [movieId=" + movieId + ", movieName=" + movieName + ", releaseDate=" + releaseDate
-				+ ", runningTime=" + runningTime + ", movieRating=" + movieRating + "]";
+				+ ", runningTime=" + runningTime + ", movieRating=" + movieRating + ", reviews=" + reviews + "]";
 	}
+
 
 	
 	

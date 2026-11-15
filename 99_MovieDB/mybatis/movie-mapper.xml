@@ -55,4 +55,41 @@
   		 	   r.REVIEW_DATE DESC	  	
   	</select>
   	
+  	<select id="searchByCondition"
+  			resultMap="movieAndReviews"
+  			parameterType="map">
+  		SELECT
+  			   MOVIE_ID
+  			 , MOVIE_NAME
+  			 , MOVIE_RATING
+  			 , REVIEW_NO
+  			 , CONTENT
+  			 , RATING
+  		  FROM
+  		  	   MOVIE m
+  		  LEFT
+  		  JOIN
+  		  	   MOVIE_REVIEW r
+  		 USING
+  		 	   (MOVIE_ID)
+  		 WHERE
+  		 	   <choose>
+  		 	   	<when test="menuNo == 1">
+  		 	   		MOVIE_NAME LIKE '%' || #{keyword} || '%'
+  		 	   	</when>
+  		 	   	<when test="menuNo == 2">
+  		 	   		MOVIE_RATING LIKE '%' || #{keyword} || '%'
+  		 	   	</when>
+  		 	   	<when test="menuNo == 3">
+  		 	   		COTENT LIKE '%' || #{keyword} || '%'
+  		 	   	</when>
+  		 	   	<otherwise>
+  		 	   		1=1
+  		 	   	</otherwise>
+  		 	   </choose>
+  		 ORDER
+  		 	BY
+  		 	   MOVIE_ID DESC
+  	</select>
+  	
   </mapper>

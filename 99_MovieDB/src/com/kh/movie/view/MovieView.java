@@ -1,6 +1,7 @@
 package com.kh.movie.view;
 
-import java.util.List; 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.kh.movie.controller.MovieController;
@@ -17,6 +18,7 @@ public class MovieView {
 	        System.out.println("영화 관리 프로그램입니다");
 	        System.out.println("1. 영화 전체 조회");
 	        System.out.println("2. 영화 리뷰 조회");
+	        System.out.println("3. 옵션별 검색");
 	        System.out.println("0. 프로그램 종료");
 	        System.out.print("메뉴를 선택하세요 > ");
 
@@ -30,6 +32,7 @@ public class MovieView {
 	            	selectMovieAndReviews();
 	                break;
 	            case "3":
+	            	searchByCondition();
 	                break;
 	            case "4":
 	                break;
@@ -76,5 +79,25 @@ public class MovieView {
 			}
 		}
 	}
+	
+	private void searchByCondition() {
+		System.out.println("검색 조건을 설정해주세요");
+		System.out.print("1. 영화이름 / 2. 영화관람등급 / 3. 리뷰 내용 > ");
+		String menuNo = scanner.nextLine();
+		System.out.print("검색하실 키워드를 입력하세요 > ");
+		String keyword = scanner.nextLine();
+		
+		
+		List<MovieDto> list = mc.searchByCondition(menuNo, keyword);
+		
+		if (list.isEmpty()) {
+			System.out.println("검색 결과가 존재하지 않습니다");
+		}else {
+			for (MovieDto s : list) {
+				System.out.println(s);
+			}
+		}
+	}
+		
 
 }

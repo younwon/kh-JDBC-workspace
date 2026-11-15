@@ -1,6 +1,7 @@
 package com.kh.movie.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -22,6 +23,13 @@ public class MovieService {
 		System.out.println("서비스도착");
 		SqlSession session = getSqlSession();
 		List<MovieDto> list = ma.selectMovieAndReviews(session);
+		session.close();
+		return list;
+	}
+	
+	public List<MovieDto> searchByCondition(Map<String, String> arguments) {
+		SqlSession session = getSqlSession();
+		List<MovieDto> list = ma.searchByCondition(session, arguments);
 		session.close();
 		return list;
 	}

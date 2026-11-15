@@ -13,8 +13,8 @@ public class FoodDao {
 		return session.selectList("foodMapper.selectFoodList");
 	}
 	
-	public List<SnackFoodDto> selectByCondition(SqlSession session, Map<String, String>arhuments) {
-		return session.selectList("foodMapper.selectByCondition", arhuments);
+	public List<SnackFoodDto> selectByCondition(SqlSession session, Map<String, String>arguments) {
+		return session.selectList("foodMapper.selectByCondition", arguments);
 	}
 
 }

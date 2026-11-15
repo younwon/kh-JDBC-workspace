@@ -6,7 +6,7 @@ import com.kh.movie.view.MovieView;
 public class MovieRun {
 
 	public static void main(String[] args) {
-		new TcpServer().movieConnect();
+		new MovieView().mainMenu();
 		/*
 		 * 지금 계획은 지금까지 만들어본 MVC+Mybatis를 서버와 클라이언트로 나눠서 해보는거
 		 * 일단 연결을 수립하고

@@ -1,9 +1,14 @@
 package com.kh.movie.run;
 
+import com.kh.movie.network.TcpClient;
+import com.kh.movie.view.MovieView;
+
 public class Run {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		TcpClient tc = new TcpClient();
+		tc.movieConnect();
+		new MovieView(tc).mainMenu();
 
 	}
 

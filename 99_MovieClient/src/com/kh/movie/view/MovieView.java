@@ -3,10 +3,14 @@ package com.kh.movie.view;
 import java.util.Scanner; 
 
 import com.kh.movie.controller.MovieController;
+import com.kh.movie.network.TcpClient;
 
 public class MovieView {
 	Scanner scanner = new Scanner(System.in);
-	MovieController mc = new MovieController();
+	MovieController mc;
+	public MovieView(TcpClient tc) {
+		this.mc = new MovieController(tc);
+	}
 	
 	public void mainMenu() {
 	    while (true) {
@@ -41,12 +45,10 @@ public class MovieView {
 	}
 	
 	private void selectAll() {
-		// TODO Auto-generated method stub
-		
+		mc.selectAll();
 	}
 
 	private void selectMovieAndReviews() {
-		// TODO Auto-generated method stub
 		
 	}
 

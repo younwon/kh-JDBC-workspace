@@ -19,6 +19,10 @@ public class MovieView {
 	        System.out.println("1. 영화 전체 조회");
 	        System.out.println("2. 영화 리뷰 조회");
 	        System.out.println("3. 옵션별 검색");
+	        System.out.println("4. 영화 하나만 조회하기");
+	        System.out.println("5. 영화 추가하기");
+	        System.out.println("6. 러닝타임 변경하기");
+	        System.out.println("7. 영화 삭제하기");
 	        System.out.println("0. 프로그램 종료");
 	        System.out.print("메뉴를 선택하세요 > ");
 

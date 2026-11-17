@@ -4,6 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="movieMapper">
+  
+  	<sql id="movieColumns">
+  		SELECT
+  			   MOVIE_ID
+  			 , MOVIE_NAME
+  			 , RELEASE_DATE
+  			 , RUNNING_TIME
+  			 , MOVIE_RATING
+  		  FROM
+  		  	   MOVIE
+  	</sql>
   	
   	<resultMap type="movieDto" id="movieAndReviews">
   		<id column="MOVIE_ID" property="movieId"/>
@@ -21,14 +32,8 @@
   	
   	<select id="selectAll"
   			resultType="movieDto">
-  		SELECT
-  			   MOVIE_ID
-  			 , MOVIE_NAME
-  			 , RELEASE_DATE
-  			 , RUNNING_TIME
-  			 , MOVIE_RATING
-  		  FROM
-  		  	   MOVIE
+  			
+  		<include refid="movieColumns" />
   		 ORDER
   		 	BY
   		 	   MOVIE_ID DESC
@@ -59,7 +64,7 @@
   			resultMap="movieAndReviews"
   			parameterType="map">
   		SELECT
-  			   MOVIE_ID
+  			   m.MOVIE_ID
   			 , MOVIE_NAME
   			 , MOVIE_RATING
   			 , REVIEW_NO
@@ -92,6 +97,18 @@
   		 	   MOVIE_ID DESC
   	</select>
   	
+  	<select id="selectOne"
+  			parameterType="_int"
+  			resultType="MovieDto">
+  			
+  		<include refid="movieColumns" />
+  		 WHERE
+  		 	   MOVIE_ID = #{movieId}
+  		 ORDER
+  		 	BY
+  		 	   MOVIE_ID DESC
+  	</select>
+  	
   	<insert id="insertMovie"
   			parameterType="movieDto">
   		INSERT
@@ -107,13 +124,23 @@
   			   )
   	</insert>
   	
+  	<update id="updateTime"
+  			parameterType="MovieDto">
+  		UPDATE
+  			   MOVIE
+  		   SET
+  		   	   RUNNING_TIME = ${runningTime}
+  		 WHERE
+  		 	   MOVIE_ID = ${movieId}
+  	</update>
+  	
   	<delete id="deleteMovie"
   			parameterType="_int">
   		DELETE
   		  FROM
   		  	   MOVIE
   		 WHERE
-  		 	   MOVIE_ID = movieId
+  		 	   MOVIE_ID = ${MOVIE_ID}
   	</delete>
   	
   </mapper>

@@ -92,4 +92,28 @@
   		 	   MOVIE_ID DESC
   	</select>
   	
+  	<insert id="insertMovie"
+  			parameterType="movieDto">
+  		INSERT
+  		  INTO
+  		  	   MOVIE
+  		VALUEC
+  			   (
+  			   SEQ_MOVIE_ID.NEXTVAL
+  			 , MOVIE_NAME
+  			 , RELEASE_DATE
+  			 , RUNNING_TIME
+  			 , MOVIE_RATING
+  			   )
+  	</insert>
+  	
+  	<delete id="deleteMovie"
+  			parameterType="_int">
+  		DELETE
+  		  FROM
+  		  	   MOVIE
+  		 WHERE
+  		 	   MOVIE_ID = movieId
+  	</delete>
+  	
   </mapper>

@@ -135,7 +135,7 @@
   	</update>
   	
   	<delete id="deleteMovie"
-  			parameterType="_int">
+  			parameterType="_long">
   		DELETE
   		  FROM
   		  	   MOVIE

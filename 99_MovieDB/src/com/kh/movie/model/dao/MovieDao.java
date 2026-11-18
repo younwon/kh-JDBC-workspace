@@ -23,4 +23,20 @@ public class MovieDao {
 		return session.selectList("movieMapper.searchByCondition", arguments);
 	}
 	
+	public MovieDto selectOne(SqlSession session, long id) {
+		return session.selectOne("movieMapper.selectOne", id);
+	}
+	
+	public int insertMovie(SqlSession session, MovieDto md) {
+		return session.insert("movieMapper.insertMovie", md);
+	}
+	
+	public int updateTIme(SqlSession session, MovieDto md) {
+		return session.update("movieMapper.updateTime", md);
+	}
+	
+	public int deleteMovie(SqlSession session, long id) {
+		return session.delete("movieMapper.deleteMovie", id);
+	}
+	
 }

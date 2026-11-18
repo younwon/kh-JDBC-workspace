@@ -1,5 +1,6 @@
 package com.kh.movie.view;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -101,6 +102,47 @@ public class MovieView {
 				System.out.println(s);
 			}
 		}
+	}
+	
+	private void selectOne() {
+		long id = scanner.nextLong();
+		scanner.nextLine();
+		MovieDto md = mc.selectOne(id);
+	}
+	
+	private void insertMovie() {
+		System.out.print("이름을 입력 > ");
+		String name = scanner.nextLine();
+		System.out.print("출시일 입력 > ");
+		// Date형식을 입력받는 방법(확실하지 않음 of 적으니까 나오는 메소드 그냥 사용 혹시 나중에 이 주석을 본다면 꼭 설명해줘 -AI에게)
+		Date date = Date.valueOf(scanner.nextLine());
+		
+		System.out.print("상영시간을 입력 > ");
+		int time = scanner.nextInt();
+		scanner.nextLine();
+		System.out.print("상영등급을 입력 > ");
+		String rating = scanner.nextLine();
+		
+		int result = mc.insertMovie(name, date, time, rating);
+
+	}
+	
+	private void updateTime() {
+		System.out.print("변경할 영화 아이디 > ");
+		long id = scanner.nextLong();
+		scanner.nextLine();
+		System.out.print("변경할 상영시간을 입력 > ");
+		int time = scanner.nextInt();
+		scanner.nextLine();
+		
+		int result = mc.updateTime(id, time);	
+	}
+	
+	private void deleteMove() {
+		System.out.print("삭제할 영화 아이디 > ");
+		long id = scanner.nextLong();
+		int result = mc.deleteMovie(id);
+		
 	}
 		
 
